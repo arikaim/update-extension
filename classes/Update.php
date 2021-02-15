@@ -43,7 +43,15 @@ class Update
             'total' => 0
         ];
         $packageManager = Arikaim::get('packages')->create($type);
-        $packages = $packageManager->getPackages();
+        if ($type == 'composer') {
+            $packages = Extension::loadJsonConfigFile('arikaim-packages.json','update');
+        } else {
+            $packages = $packageManager->getPackages();
+        }
+       
+
+     //   print_r($packages);
+        //exit();
 
         foreach($packages as $name) {
             $package = $packageManager->createPackage($name);
@@ -94,6 +102,9 @@ class Update
         
         foreach ($packages as $packageName) {
             # code...
+            echo ROOT_PATH . BASE_PATH;
+            exit();
+
             $version = Composer::getInstalledPackageVersion(ROOT_PATH . BASE_PATH,$packageName);
             if ($version === false) {
                 continue;
@@ -110,19 +121,29 @@ class Update
                     'current_version' => $version,
                     'version'         => $lastVersion
                 ];
+
+               
+
                 if ($update == true) {
+                    echo "run update: " . $packageName;
                     Composer::run('update',[$packageName]);
+
+                    
                     $version = Composer::getInstalledPackageVersion(ROOT_PATH . BASE_PATH,$packageName);
                     if (Utils::checkVersion($version,$lastVersion) == true) {
                         // updated
                         $this->jobProgress($item);
+                        $result['items'][] = $item;  
+                        $result['total']++;   
+                    } else {
+                        // error updating
+                        $this->jobProgressError($item);
                     }
                 } else {
                     $this->jobProgress($item);
+                    $result['items'][] = $item;  
+                    $result['total']++;    
                 }
-             
-                $result['items'][] = $item;       
-                $result['total']++;   
             }
         }
         

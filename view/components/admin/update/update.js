@@ -44,8 +44,8 @@ function UpdateView() {
         arikaim.ui.button('.update-button',function(element) {     
             var type = $(element).attr('type');
 
-            $('#update_content').html('');
-            $('#update_content').hide();
+          //  $('#update_content').html('');
+           // $('#update_content').hide();
 
             $('#update_progress').progress('reset');          
             $('#progress_content').show();

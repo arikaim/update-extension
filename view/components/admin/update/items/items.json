@@ -2,7 +2,7 @@
     "labels": {
         "empty": "..",
         "version": "New version",
-        "packages": "Packages",
+        "composer": "Packages",
         "library": "UI libraries",
         "module": "Modules",
         "update": "Update",

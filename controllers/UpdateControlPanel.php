@@ -57,8 +57,9 @@ class UpdateControlPanel extends ControlPanelApiController
 
             $this->initTaskProgress();
 
+            $result = null;
             switch ($type) {
-                case 'packages': 
+                case 'composer': 
                     $result = $update->corePackages(true);
                     break;
                 default: 
@@ -68,11 +69,11 @@ class UpdateControlPanel extends ControlPanelApiController
          
             $this->taskProgressEnd();
 
-            $this->setResponse(\is_array($result),function() use($result) {
+            $this->setResponse(\is_array($result),function() use($result,$type) {
                 $this
                     ->field('items',$result['items'])
                     ->field('total',$result['total'])
-                    ->message('Check for new verison.');
+                    ->message('Update ' . $type);
             },'Error update check.');               
         });
         $data->validate();        
@@ -105,15 +106,8 @@ class UpdateControlPanel extends ControlPanelApiController
 
             $this->initTaskProgress();
             
-            switch ($type) {
-                case 'composer': 
-                    $result = $update->corePackages();
-                    break;
-                default: 
-                    $result = $update->checkPackages($type);
-                    break;
-            }
-          
+            $result = $update->checkPackages($type);
+
             $this->taskProgressEnd();
            
             $this->setResponse(\is_array($result),function() use($result) {
