@@ -9,12 +9,12 @@
 function UpdateControlPanel() {
    
     this.update = function(type, onProgress, onSuccess, onError) {
-        type = getDefaultValue(type,'packages');
+        type = getDefaultValue(type,'composer');
         return taskProgress.put('/api/update/admin/update/' + type,{},onProgress,onSuccess,onError);          
     };
 
     this.check = function(type, onProgress, onSuccess, onError) {
-        type = getDefaultValue(type,'packages');
+        type = getDefaultValue(type,'composer');
         return taskProgress.put('/api/update/admin/check/' + type,{},onProgress,onSuccess,onError);             
     };
 

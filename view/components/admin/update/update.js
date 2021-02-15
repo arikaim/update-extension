@@ -27,7 +27,7 @@ function UpdateView() {
             $('#update_progress').progress('reset');          
             $('#progress_content').show();
 
-            return self.checkItems('packages',function() {   
+            return self.checkItems('composer',function() {   
                 $(element).addClass('loading disabled');            
                 self.checkItems('library',function() {
                     self.checkItems('module',function() {

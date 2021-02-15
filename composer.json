@@ -1,6 +1,6 @@
 {
     "name": "arikaim/update-extension",
-    "description": "Arikaim Update extension",
+    "description": "Arikaim CMS Update extension",
     "keywords": ["Module", "Arikaim update extension"],
     "type": "arikaim-extension",
     "license": "GPL-3.0-or-later",

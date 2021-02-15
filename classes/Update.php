@@ -80,11 +80,11 @@ class Update
     }
 
     /**
-     * Check core packages for updates
+     * Check or update core packages
      *
      * @return array
      */
-    public function checkCorePackages(): array
+    public function corePackages(bool $update = false): array
     {
         $packages = Extension::loadJsonConfigFile('arikaim-packages.json','update');
         $result = [
@@ -103,13 +103,24 @@ class Update
             $lastVersion = Composer::getLastVersion($tokens[0],$tokens[1]);
        
             if (Utils::checkVersion($version,$lastVersion) == false) {
+                // package have new verison
                 $item = [
                     'type'            => 'package',
                     'name'            => $packageName, 
                     'current_version' => $version,
                     'version'         => $lastVersion
                 ];
-                $this->jobProgress($item);
+                if ($update == true) {
+                    Composer::run('update',[$packageName]);
+                    $version = Composer::getInstalledPackageVersion(ROOT_PATH . BASE_PATH,$packageName);
+                    if (Utils::checkVersion($version,$lastVersion) == true) {
+                        // updated
+                        $this->jobProgress($item);
+                    }
+                } else {
+                    $this->jobProgress($item);
+                }
+             
                 $result['items'][] = $item;       
                 $result['total']++;   
             }
@@ -123,8 +134,11 @@ class Update
     }
 
 
+    /*
     public function updateCorePackages(): array
     {
+       //$packages = Extension::loadJsonConfigFile('arikaim-packages.json','update');
+
         $result = [
             'items' => [],
             'total' => 0
@@ -132,6 +146,7 @@ class Update
 
         return $result;
     }
+    */
 
     /**
      * Check package for updates
@@ -140,12 +155,9 @@ class Update
      */
     public function updatePackages(string $type): array
     {
-        $result = [
-            'items' => [],
-            'total' => 0
-        ];
+        
 
-        return $result;
+        return [];
     }
 
     /**

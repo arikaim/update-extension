@@ -59,7 +59,7 @@ class UpdateControlPanel extends ControlPanelApiController
 
             switch ($type) {
                 case 'packages': 
-                    $result = $update->updateCorePackages();
+                    $result = $update->corePackages(true);
                     break;
                 default: 
                     $result = $update->updatePackages($type);
@@ -89,7 +89,7 @@ class UpdateControlPanel extends ControlPanelApiController
     public function checkUpdateController($request, $response, $data) 
     {         
         $this->onDataValid(function($data) {
-            $type = $data->get('type','packages');
+            $type = $data->get('type','composer');
 
             $update = new Update();
             $update->onJobProgress(function($item) {
@@ -106,8 +106,8 @@ class UpdateControlPanel extends ControlPanelApiController
             $this->initTaskProgress();
             
             switch ($type) {
-                case 'packages': 
-                    $result = $update->checkCorePackages();
+                case 'composer': 
+                    $result = $update->corePackages();
                     break;
                 default: 
                     $result = $update->checkPackages($type);
