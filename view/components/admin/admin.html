@@ -1,0 +1,10 @@
+{% set items = [ 
+    { id: 'update_button', title: labels.update, component: 'update::admin.update', icon: 'tasks', active: true }    
+] %}
+
+{{  component('components:tabs',{ 
+        items: items,
+        menu: { component: 'system:admin.extensions.menu.actions', extension: 'update' },
+        content: { component: 'update::admin.update' } 
+    })
+}}

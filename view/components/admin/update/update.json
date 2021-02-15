@@ -1,0 +1,9 @@
+{
+    "labels": {      
+        "title": "Arikaim CMS",
+        "product": "Product",
+        "core": "Core",
+        "check": "Check",
+        "version": "Version" 
+    }
+}

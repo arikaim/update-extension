@@ -1,0 +1,29 @@
+<div class="mt-2 p-4">
+    <h4>
+        {{ labels[type] }}
+    </h4>
+    <div class="ui divider"></div>
+    <div class="ui list pl-4" id="{{ type }}_list">
+        {% for item in items %}
+        <div class="item pl-4">   
+            {% if item.type is not empty %}
+            <div class="right floated content">  
+                <div class="ui basic label">
+                    <span class="ui blue text">{{ labels.version }}</span>
+                    {{ item.version }}
+                </div>      
+            </div>
+            {% endif %}
+            <div class="content">
+                {{ item.name }}
+            </div>          
+        </div>
+        {% endfor %}
+    </div>
+    {% if total > 0 %}
+    <button class="ui green icon labeled mini button update-button" type="{{ type }}">
+        <i class="icon download"></i>
+        {{ labels.update }}
+    </button>
+    {% endif %}
+</div>

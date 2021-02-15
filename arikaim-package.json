@@ -1,0 +1,19 @@
+{
+    "title": "Update",
+    "name": "update",
+    "package-type": "extension",
+    "class": "Update",
+    "type": "system",
+    "description": "Arikaim CMS Update",
+    "short-description": "System update",
+    "version": "1.0.0",
+    "position": "1",
+    "repository": "https://github.com/arikaim/update-extension.git",
+    "admin-menu": {        
+        "title": "Update",
+        "icon": "cloud download alternate",       
+        "page-icon": "cloud download alternate",
+        "page-title": "Update", 
+        "component": "update::admin"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "include": {
+        "js":[
+            "components:progress",
+            "system:admin.packages.store"
+        ]
+    },
+    "access": {
+        "auth": "session",
+        "permission": "ControlPanel:full",
+        "redirect": "/admin"           
+    }
+}
