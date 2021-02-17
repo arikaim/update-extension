@@ -30,9 +30,13 @@ function UpdateView() {
             return self.checkItems('composer',function() {   
                 $(element).addClass('loading disabled');            
                 self.checkItems('library',function() {
+                    $('#update_progress').progress('increment'); 
                     self.checkItems('module',function() {
+                        $('#update_progress').progress('increment'); 
                         self.checkItems('extension',function() {                           
-                            $(element).removeClass('loading disabled');                                  
+                            $(element).removeClass('loading disabled');    
+                            $('#update_progress').progress('reset');          
+                            $('#progress_content').hide();                              
                         })
                     });
                 });
@@ -107,6 +111,6 @@ function UpdateView() {
 
 var updateView = new UpdateView();
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     updateView.init();
 });

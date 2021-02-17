@@ -25,8 +25,7 @@ class Update extends Extension
     {
         // Control Panel       
         $this->addApiRoute('PUT','/api/update/admin/update/{type}','UpdateControlPanel','update','session');      
-        $this->addApiRoute('PUT','/api/update/admin/check/{type}','UpdateControlPanel','checkUpdate','session');        
-
+    
         // Console Commands
         //$this->registerConsoleCommand('QueueWorker');            
     }

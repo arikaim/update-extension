@@ -7,5 +7,11 @@
         "module": "Modules",
         "update": "Update",
         "extension": "Extensions"
+    },
+    "icons": {
+        "composer": "code",
+        "library": "cube",
+        "module": "plug",      
+        "extension": "puzzle piece"
     }
 }
