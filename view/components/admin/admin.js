@@ -10,12 +10,12 @@ function UpdateControlPanel() {
    
     this.update = function(type, onProgress, onSuccess, onError) {
         type = getDefaultValue(type,'composer');
-        return taskProgress.put('/api/update/admin/update/' + type,{},onProgress,onSuccess,onError);          
+        return taskProgress.put('/api/update/admin/update/' + type,{ update: true },onProgress,onSuccess,onError);          
     };
 
     this.check = function(type, onProgress, onSuccess, onError) {
         type = getDefaultValue(type,'composer');
-        return taskProgress.put('/api/update/admin/check/' + type,{},onProgress,onSuccess,onError);             
+        return taskProgress.put('/api/update/admin/update/' + type,{ update: false },onProgress,onSuccess,onError);             
     };
 
     this.init = function() {     
@@ -25,6 +25,6 @@ function UpdateControlPanel() {
 
 var updateControlPanel = new UpdateControlPanel();
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     updateControlPanel.init();
 });
