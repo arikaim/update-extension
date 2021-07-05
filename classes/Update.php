@@ -57,6 +57,7 @@ class Update
             $package = $packageManager->createPackage($name);
             $version = $package->getVersion();
             $repository = $packageManager->getRepository($name);
+
             if (empty($repository) == true) {
                 continue;
             }
@@ -105,7 +106,7 @@ class Update
             echo ROOT_PATH . BASE_PATH;
             exit();
 
-            $version = Composer::getInstalledPackageVersion(ROOT_PATH . BASE_PATH,$packageName);
+            $version = Composer::getInstalledPackageVersion($packageName);
             if ($version === false) {
                 continue;
             }
@@ -129,7 +130,7 @@ class Update
                     Composer::run('update',[$packageName]);
 
                     
-                    $version = Composer::getInstalledPackageVersion(ROOT_PATH . BASE_PATH,$packageName);
+                    $version = Composer::getInstalledPackageVersion($packageName);
                     if (Utils::checkVersion($version,$lastVersion) == true) {
                         // updated
                         $this->jobProgress($item);
