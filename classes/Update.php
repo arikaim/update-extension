@@ -46,14 +46,12 @@ class Update
             $package = $packageManager->createPackage($name);
             $version = $package->getVersion();
             $repository = $packageManager->getRepository($name);
-<<<<<<< HEAD
 
             if (empty($repository) == true) {
                 continue;
             }
 
-=======
->>>>>>> 3093a8be98ac7e8baad60f04c2a534b1babcc46f
+
             $lastVersion = $repository->getLastVersion();
             if (empty($lastVersion) == true) {
                 continue;
@@ -69,7 +67,7 @@ class Update
                 'current_version' => $version,
                 'version'         => $lastVersion
             ];
-<<<<<<< HEAD
+
             $this->jobProgress($item);
             $result['items'][] = $item;       
             $result['total']++;   
@@ -96,10 +94,7 @@ class Update
         ];
         
         foreach ($packages as $packageName) {
-            # code...
-            echo ROOT_PATH . BASE_PATH;
-            exit();
-
+           
             $version = Composer::getInstalledPackageVersion($packageName);
             if ($version === false) {
                 continue;
@@ -117,13 +112,9 @@ class Update
                     'version'         => $lastVersion
                 ];
 
-               
-
                 if ($update == true) {
                     echo "run update: " . $packageName;
                     Composer::run('update',[$packageName]);
-
-                    
                     $version = Composer::getInstalledPackageVersion($packageName);
                     if (Utils::checkVersion($version,$lastVersion) == true) {
                         // updated
@@ -139,7 +130,8 @@ class Update
                     $result['items'][] = $item;  
                     $result['total']++;    
                 }
-=======
+            }
+            
             $success = ($update == true) ? $repository->install($lastVersion) : true;
 
             if ($success == true) {
@@ -148,7 +140,6 @@ class Update
                 $result['total']++; 
             } else {
                 $this->jobProgressError($item);
->>>>>>> 3093a8be98ac7e8baad60f04c2a534b1babcc46f
             }
         }
 
@@ -158,6 +149,7 @@ class Update
 
         return $result;
     }
+   
 
     /**
      * Add empty item
